@@ -1,21 +1,30 @@
-function checkForSpam(message){
-    const blackListedWord1 = "spam";
-    const blackListedWord2 = "sale";
+class StringBuilder {
+    #initialValue;
 
-    const transformedString1 = blackListedWord1.toUpperCase();
-    const transformedString2 = blackListedWord2.toUpperCase();
-
-
-    if (message.toUpperCase().includes(transformedString1) || message.toUpperCase().includes(transformedString2)){
-        return true;
-    } else{
-        return false;
+    constructor(value){
+        this.#initialValue = value;
     }
 
-}console.log(checkForSpam("Latest technology news")); // false
-console.log(checkForSpam("JavaScript weekly newsletter")); // false
-console.log(checkForSpam("Get best sale offers now!")); // true
-console.log(checkForSpam("Amazing SalE, only tonight!")); // true
-console.log(checkForSpam("Trust me, this is not a spam message")); // true
-console.log(checkForSpam("Get rid of sPaM emails. Our book in on sale!")); // true
-console.log(checkForSpam("[SPAM] How to earn fast money?")); // true
+    getValue(){
+        return this.#initialValue;
+    }
+    padEnd(str){
+        this.#initialValue = this.#initialValue + str;
+    }
+    padStart(str){
+        this.#initialValue = str + this.#initialValue;
+    }
+    padBoth(str){
+        this.#initialValue = str + this.#initialValue + str;
+    }
+}
+
+
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
